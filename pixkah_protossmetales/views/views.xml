@@ -40,21 +40,93 @@
     </record>
     -->
 
+    <!-- Scale ticket form menu action -->
+    <record model="ir.actions.act_window" id="action_scale_ticket_list">
+        <field name="name">Scale Tickets</field>
+        <field name="res_model">pixkah_protossmetales.scale_ticket</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">Create the first scale ticket
+            </p>
+        </field>
+    </record>
+
+
+    <!-- Scale form view -->
+    <record model="ir.ui.view" id="pixkah_protossmetales.view_scale_form">
+        <field name="name">pixkah_protossmetales.scale.form</field>
+        <field name="model">pixkah_protossmetales.scale</field>
+        <field name="arch" type="xml">
+            <form string="Scale">
+              <sheet>
+                <div class="oe_title">
+                  <label for="name" class="oe_edit_only"/>
+                  <h1>
+                      <field name="name" placeholder="Scale's Name" />
+                  </h1>
+                  <field name="short_name" placeholder="Scale's short name"/>
+                </div>
+                <group string="Address">
+                    <field name="address_id"
+                        context="{'show_address': 1}"
+                        options='{"always_reload": True, "highlight_first_line": True}'/>
+                </group>
+                <group string="Information">
+                  <field name="max_weight"/>
+                  <field name="location"/>
+                  <field name="serie"/>
+                </group>
+              </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <!-- Scale form menu action -->
+    <record model="ir.actions.act_window" id="pixkah_protossmetales.action_scale_list">
+        <field name="name">Scales</field>
+        <field name="res_model">pixkah_protossmetales.scale</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">Create the first scale
+            </p>
+        </field>
+    </record>
+
+    <!-- Adding ticket to stock move -->
+    <record model="ir.ui.view" id="view_stock_move_scale_ticket_tree">
+        <field name="name">pixkah_protossmetales.sotck_scale_ticket_tree</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+          <notebook position="inside">
+            <page string="Scale Tickets">
+              <field name="scale_tickets"/>
+            </page>
+          </notebook>
+          <field name="origin" position="after">
+              <field name="scale_ticket_id"/>
+              <field name="driver_id"/>
+          </field>
+        </field>
+    </record>
+
     <!-- Top menu item -->
-    <!--
-    <menuitem name="pixkah_protossmetales" id="pixkah_protossmetales.menu_root"/>
-    -->
-    <!-- menu categories -->
-    <!--
-    <menuitem name="Menu 1" id="pixkah_protossmetales.menu_1" parent="pixkah_protossmetales.menu_root"/>
-    <menuitem name="Menu 2" id="pixkah_protossmetales.menu_2" parent="pixkah_protossmetales.menu_root"/>
-    -->
+    <menuitem name="Protoss Metales" id="pixkah_protossmetales.menu_root"/>
+
+    <!-- menu Operations -->
+    <menuitem name="Operations" id="pixkah_protossmetales.menu_operations" parent="pixkah_protossmetales.menu_root"/>
     <!-- actions -->
-    <!--
-    <menuitem name="List" id="pixkah_protossmetales.menu_1_list" parent="pixkah_protossmetales.menu_1"
-              action="pixkah_protossmetales.action_window"/>
-    <menuitem name="Server to list" id="pixkah_protossmetales" parent="pixkah_protossmetales.menu_2"
-              action="pixkah_protossmetales.action_server"/>
-    -->
+    <menuitem name="Scale Tickets" id="pixkah_protossmetales.menu_scale_tickets_list" parent="pixkah_protossmetales.menu_operations"
+              action="pixkah_protossmetales.action_scale_ticket_list"/>
+
+    <!-- menu Configuration -->
+    <menuitem name="Configuration" id="pixkah_protossmetales.menu_configuration" parent="pixkah_protossmetales.menu_root"/>
+    <!-- actions -->
+    <menuitem name="Scales" id="pixkah_protossmetales.menu_scales_list" parent="pixkah_protossmetales.menu_configuration"
+              action="pixkah_protossmetales.action_scale_list"/>
+
   </data>
 </odoo>

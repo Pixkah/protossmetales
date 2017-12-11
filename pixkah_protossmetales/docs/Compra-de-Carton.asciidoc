@@ -1,0 +1,122 @@
+= Modelos
+
+[plantuml, format="svg", id="tickets-model", width="100%"]
+--
+skinparam class {
+    BackgroundColor<<Nueva>> #ffff
+    BackgroundColor<<Modificada>> #ffffff
+    BackgroundColor<<Existente>> #ffffff
+}
+
+package Flotilla <<Rectangle>> #be98ff {
+    class Vehiculo<<Existente>>
+}
+
+package Compras <<Rectangle>> #6ac6d7 {
+    class Producto<<Existente>>
+    class "Orden de Compra"<<Existente>>
+}
+
+package Inventario <<Frame>> #f87b7b {
+    class "Orden de Recolección"<<Modificada>>
+}
+
+package "Protoss Metales" <<Rectangle>> #8eed5a {
+    class Bascula<<Nueva>>
+    class "Ticket de Bascula"<<Nueva>>
+}
+
+package Base <<Rectangle>> #c781b4 {
+    class Compañia<<Existente>>
+    class Employee<<Existente>>
+}
+
+class Employee<<Existente>> {
+    employee_id
+    ==
+    nombre : string
+    address : address
+}
+
+class Bascula {
+    bascula_id : id
+    ==
+    compañia_id : Compañia
+    ..
+    nombre : string
+    nombre_corto : string
+    maximo_peso : toneladas
+    ubicacion : string
+    serie : string
+}
+
+class Producto {
+    producto_id : id
+    ==
+    nombre : string
+    precio : float
+}
+
+class "Orden de Compra" {
+    orden_de_compra_id : id
+    ==
+    producto_id : id
+    ..
+    fecha_hora_estimada_de_recoleccion : date
+}
+
+class Vehiculo {
+    vehiculo_id : id
+    ==
+    modelo_id : id
+    placas : string
+}
+
+class "Ticket de Bascula" {
+    ticket_de_bascula_id : id
+    ==
+    bascula_id : id
+    vehiculo_id : id
+    orden_de_recoleccion_id : id
+    ..
+    folio : string
+    ..
+    entrada_fecha : date
+    entrada_peso : float
+    ..
+    salida_fecha : date
+    salida_peso : float
+    ..
+    tara : float
+    bruto : float
+    neto : float (calculado)
+}
+
+class "Orden de Recolección" {
+    orden_de_recoleccion_id : id
+    ==
+    orden_de_compra_id : id
+    producto_id : id
+    ..
+    ticket_de_bascula_id : id
+    chofer_id : id
+    ..
+    fecha_estimada : date
+    fecha_de_recoleccion : date
+}
+
+class Compañia {
+    compañia_id : id
+    ==
+    nombre : string
+    direccion : address
+}
+
+Employee <- "Orden de Recolección"
+Vehiculo <- "Ticket de Bascula"
+Producto <- "Orden de Compra"
+"Orden de Compra" <-- "Orden de Recolección"
+ "Orden de Recolección" --> "Ticket de Bascula"
+"Ticket de Bascula" -> Bascula
+Bascula --> Compañia
+--
