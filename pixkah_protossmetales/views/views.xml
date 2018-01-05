@@ -95,23 +95,18 @@
         </field>
     </record>
 
-    <!-- Adding ticket to stock move -->
-    <record model="ir.ui.view" id="view_stock_move_scale_ticket_tree">
-        <field name="name">pixkah_protossmetales.sotck_scale_ticket_tree</field>
+    <!-- Adding ticket to stock picking -->
+    <record model="ir.ui.view" id="view_picking_form">
+        <field name="name">stock.picking.form</field>
         <field name="model">stock.picking</field>
         <field name="inherit_id" ref="stock.view_picking_form"/>
         <field name="arch" type="xml">
-          <notebook position="inside">
-            <page string="Scale Tickets">
-              <field name="scale_tickets"/>
-            </page>
-          </notebook>
-          <field name="origin" position="after">
-              <field name="scale_ticket_id"/>
-              <field name="driver_id"/>
-          </field>
+            <xpath expr="//field[@name='move_lines']/tree/field[@name='quantity_done']" position="before">
+                <field name="scale_ticket_id"/>
+            </xpath>
         </field>
     </record>
+
 
     <!-- Top menu item -->
     <menuitem name="Protoss Metales" id="pixkah_protossmetales.menu_root"/>
