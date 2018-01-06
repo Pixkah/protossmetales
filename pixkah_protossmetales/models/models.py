@@ -32,6 +32,8 @@ class Scale(models.Model):
 class ScaleTicket(models.Model):
     _name = 'pixkah_protossmetales.scale_ticket'
 
+    _inherit = ['mail.thread', 'mail.activity.mixin']
+
     name = fields.Char(compute='_compute_name', string="Ticket", store=True)
 
     scale_id = fields.Many2one('pixkah_protossmetales.scale', string="Scale")

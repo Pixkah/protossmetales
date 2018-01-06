@@ -66,6 +66,39 @@
         </field>
     </record>
 
+    <record model="ir.ui.view" id="scale_ticket_form_view">
+      <field name="name">scale_ticket_form_view</field>
+      <field name="model">pixkah_protossmetales.scale_ticket</field>
+      <field name="arch" type="xml">
+        <form string="Scale Ticket">
+          <sheet>
+            <group>
+              <group>
+                <field name="name"/>
+                <field name="scale_id"/>
+                <field name="folio"/>
+                <field name="stock_move"/>
+                <field name="protoss_status"/>
+                <field name="driver_id"/>
+                <field name="vehicle_id"/>
+                <field name="trailer_id"/>
+                <field name="first_date"/>
+                <field name="first_weight"/>
+                <field name="second_date"/>
+                <field name="second_weight"/>
+                <field name="net_weight"/>
+              </group>
+            </group>
+          </sheet>
+          <div class="oe_chatter">
+              <field name="message_follower_ids" widget="mail_followers"/>
+              <field name="activity_ids" widget="mail_activity"/>
+              <field name="message_ids" widget="mail_thread"/>
+          </div>
+        </form>
+      </field>
+    </record>
+
     <!-- Scale form view -->
     <record model="ir.ui.view" id="pixkah_protossmetales.view_scale_form">
         <field name="name">pixkah_protossmetales.scale.form</field>
