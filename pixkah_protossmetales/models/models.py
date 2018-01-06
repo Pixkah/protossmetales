@@ -113,8 +113,7 @@ class StockMove(models.Model):
     _inherit = "stock.move"
 
     scale_ticket = fields.Many2one('pixkah_protossmetales.scale_ticket',
-      string="Scale Ticket",
-      domain=[('protoss_status', 'in', ('new', 'draft'))]
+      string="Scale Ticket"
     )
 
 
