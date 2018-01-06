@@ -52,6 +52,19 @@
         </field>
     </record>
 
+    <!-- Scale ticket tree view -->
+    <record model="ir.ui.view" id="scale_ticket_tree_view">
+        <field name="name">scale_ticket_tree_view</field>
+        <field name="model">pixkah_protossmetales.scale_ticket</field>
+        <field name="arch" type="xml">
+            <tree string="Scale Tickets">
+                <field name="name"/>
+                <field name="stock_move"/>
+                <field name="net_weight"/>
+                <field name="protoss_status"/>
+            </tree>
+        </field>
+    </record>
 
     <!-- Scale form view -->
     <record model="ir.ui.view" id="pixkah_protossmetales.view_scale_form">
@@ -95,15 +108,29 @@
         </field>
     </record>
 
-    <!-- Adding ticket to stock picking -->
+    <!-- Adding ticket to stock move picking -->
     <record model="ir.ui.view" id="view_picking_form">
         <field name="name">stock.picking.form</field>
         <field name="model">stock.picking</field>
         <field name="inherit_id" ref="stock.view_picking_form"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='move_lines']/tree/field[@name='quantity_done']" position="before">
-                <field name="scale_ticket_id"/>
+                <field name="scale_ticket"/>
             </xpath>
+        </field>
+    </record>
+
+    <!-- Adding ticket to stock move picking -->
+    <record model="ir.ui.view" id="view_move_picking_form">
+        <field name="name">stock.move.form</field>
+        <field name="model">stock.move</field>
+        <field name="inherit_id" ref="stock.view_move_picking_form"/>
+        <field name="arch" type="xml">
+            <group position="inside">
+                <group string="Scale Ticket">
+                    <field name="scale_ticket"/>
+                </group>
+            </group>
         </field>
     </record>
 

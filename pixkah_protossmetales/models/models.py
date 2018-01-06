@@ -37,6 +37,17 @@ class ScaleTicket(models.Model):
     scale_id = fields.Many2one('pixkah_protossmetales.scale', string="Scale")
     folio = fields.Char(string="Folio", required=True, index=True)
 
+    stock_move = fields.Many2one('stock.move', string="Stock Move")
+
+    protoss_status = fields.Selection([
+        ('new', 'New'),
+        ('draft', 'Draft'),
+        ('assigned', 'Assigned')
+      ],
+      string="Status",
+      copy=False, index=True, readonly=True,
+      default="new")
+
     driver_id = fields.Many2one('hr.employee', string="Driver")    
     vehicle_id = fields.Many2one('fleet.vehicle', string="Vehicle")
     trailer_id = fields.Many2one('fleet.vehicle', string="Trailer")
@@ -45,7 +56,7 @@ class ScaleTicket(models.Model):
     second_date = fields.Date(string="Date")
     second_weight = fields.Float(string="Weight (kg)")
     net_weight = fields.Float(compute='_compute_net_weight', store=True)
-
+    
     @api.depends('first_weight', 'second_weight')
     def _compute_net_weight(self):
       for record in self:
@@ -66,18 +77,46 @@ class Picking(models.Model):
     def _autocompute_done(self):
       for record in self:
         for move in record.move_lines:
-          if move.scale_ticket_id:
-            move.quantity_done = move.scale_ticket_id.net_weight
+          if move.scale_ticket:
+            move.quantity_done = move.scale_ticket.net_weight
+            self._cr.execute("""
+              update
+                pixkah_protossmetales_scale_ticket
+              set
+                protoss_status='draft',
+                stock_move=%s
+              where
+                id=%s
+            """, (move.id, move.scale_ticket.id))
+
+    @api.multi
+    def button_validate(self):
+      res = super(Picking, self).button_validate()
+
+      # Update ticket status
+      for record in self:
+        for move in record.move_lines:
+          if move.scale_ticket:
+            move.quantity_done = move.scale_ticket.net_weight
+            self._cr.execute("""
+              update
+                pixkah_protossmetales_scale_ticket
+              set
+                protoss_status='assigned',
+                stock_move=%s
+              where
+                id=%s
+            """, (move.id, move.scale_ticket.id))
+      return res
 
 class StockMove(models.Model):
     _inherit = "stock.move"
 
-    scale_ticket_id = fields.Many2one('pixkah_protossmetales.scale_ticket', string="Scale Ticket")
+    scale_ticket = fields.Many2one('pixkah_protossmetales.scale_ticket',
+      string="Scale Ticket",
+      domain=[('protoss_status', 'in', ('new', 'draft'))]
+    )
 
-'''
-    @api.depends('scale_ticket_id')
-    def _autocompute_quantity_done(self):
-      for move in self:
-        if move.scale_ticket_id:
-          move.quantity_done = move.scale_ticket_id.net_weight
-'''
+
+
+
