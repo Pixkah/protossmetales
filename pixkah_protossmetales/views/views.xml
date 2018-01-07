@@ -169,7 +169,8 @@
 
 
     <!-- Top menu item -->
-    <menuitem name="Protoss Metales" id="pixkah_protossmetales.menu_root"/>
+    <menuitem name="Protoss Metales" id="pixkah_protossmetales.menu_root"
+        web_icon="pixkah_protossmetales,static/description/icon.png"/>
 
     <!-- menu Operations -->
     <menuitem name="Operations" id="pixkah_protossmetales.menu_operations" parent="pixkah_protossmetales.menu_root"/>
