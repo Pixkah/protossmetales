@@ -1,0 +1,245 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* pixkah_protossmetales
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-01-07 00:28+0000\n"
+"PO-Revision-Date: 2018-01-06 19:09-0600\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: es_MX\n"
+"X-Generator: Poedit 2.0.5\n"
+
+#. module: pixkah_protossmetales
+#: model:ir.model.fields,field_description:pixkah_protossmetales.field_pixkah_protossmetales_scale_active
+msgid "Active"
+msgstr "Activo"
+
+#. module: pixkah_protossmetales
+#: model:ir.model.fields,field_description:pixkah_protossmetales.field_pixkah_protossmetales_scale_address_id
+#: model:ir.ui.view,arch_db:pixkah_protossmetales.view_scale_form
+msgid "Address"
+msgstr "Dirección"
+
+#. module: pixkah_protossmetales
+#: selection:pixkah_protossmetales.scale_ticket,protoss_status:0
+msgid "Assigned"
+msgstr "Asignado"
+
+#. module: pixkah_protossmetales
+#: model:ir.ui.menu,name:pixkah_protossmetales.menu_configuration
+msgid "Configuration"
+msgstr "Configuración"
+
+#. module: pixkah_protossmetales
+#: model:ir.actions.act_window,help:pixkah_protossmetales.action_scale_list
+msgid "Create the first scale"
+msgstr "Crear la primera báscula"
+
+#. module: pixkah_protossmetales
+#: model:ir.actions.act_window,help:pixkah_protossmetales.action_scale_ticket_list
+msgid "Create the first scale ticket"
+msgstr "Crear el primer ticket de báscula"
+
+#. module: pixkah_protossmetales
+#: model:ir.model.fields,field_description:pixkah_protossmetales.field_pixkah_protossmetales_scale_create_uid
+#: model:ir.model.fields,field_description:pixkah_protossmetales.field_pixkah_protossmetales_scale_ticket_create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: pixkah_protossmetales
+#: model:ir.model.fields,field_description:pixkah_protossmetales.field_pixkah_protossmetales_scale_create_date
+#: model:ir.model.fields,field_description:pixkah_protossmetales.field_pixkah_protossmetales_scale_ticket_create_date
+msgid "Created on"
+msgstr "Creado en"
+
+#. module: pixkah_protossmetales
+#: model:ir.model.fields,field_description:pixkah_protossmetales.field_pixkah_protossmetales_scale_ticket_first_date
+#: model:ir.model.fields,field_description:pixkah_protossmetales.field_pixkah_protossmetales_scale_ticket_second_date
+msgid "Date"
+msgstr "Fecha"
+
+#. module: pixkah_protossmetales
+#: model:ir.model.fields,field_description:pixkah_protossmetales.field_pixkah_protossmetales_scale_display_name
+#: model:ir.model.fields,field_description:pixkah_protossmetales.field_pixkah_protossmetales_scale_ticket_display_name
+msgid "Display Name"
+msgstr "Mostrar nombre"
+
+#. module: pixkah_protossmetales
+#: selection:pixkah_protossmetales.scale_ticket,protoss_status:0
+msgid "Draft"
+msgstr "Borrador"
+
+#. module: pixkah_protossmetales
+#: model:ir.model.fields,field_description:pixkah_protossmetales.field_pixkah_protossmetales_scale_ticket_driver_id
+msgid "Driver"
+msgstr "Chofer"
+
+#. module: pixkah_protossmetales
+#: model:ir.model.fields,field_description:pixkah_protossmetales.field_pixkah_protossmetales_scale_ticket_folio
+msgid "Folio"
+msgstr "N.º folio:"
+
+#. module: pixkah_protossmetales
+#: model:ir.model.fields,field_description:pixkah_protossmetales.field_pixkah_protossmetales_scale_id
+#: model:ir.model.fields,field_description:pixkah_protossmetales.field_pixkah_protossmetales_scale_ticket_id
+msgid "ID"
+msgstr "ID (identificación)"
+
+#. module: pixkah_protossmetales
+#: model:ir.ui.view,arch_db:pixkah_protossmetales.view_scale_form
+msgid "Information"
+msgstr "Información"
+
+#. module: pixkah_protossmetales
+#: model:ir.model.fields,field_description:pixkah_protossmetales.field_pixkah_protossmetales_scale___last_update
+#: model:ir.model.fields,field_description:pixkah_protossmetales.field_pixkah_protossmetales_scale_ticket___last_update
+msgid "Last Modified on"
+msgstr "Última modificación en"
+
+#. module: pixkah_protossmetales
+#: model:ir.model.fields,field_description:pixkah_protossmetales.field_pixkah_protossmetales_scale_ticket_write_uid
+#: model:ir.model.fields,field_description:pixkah_protossmetales.field_pixkah_protossmetales_scale_write_uid
+msgid "Last Updated by"
+msgstr "Última actualización de"
+
+#. module: pixkah_protossmetales
+#: model:ir.model.fields,field_description:pixkah_protossmetales.field_pixkah_protossmetales_scale_ticket_write_date
+#: model:ir.model.fields,field_description:pixkah_protossmetales.field_pixkah_protossmetales_scale_write_date
+msgid "Last Updated on"
+msgstr "Última actualización en"
+
+#. module: pixkah_protossmetales
+#: model:ir.model.fields,field_description:pixkah_protossmetales.field_pixkah_protossmetales_scale_location
+msgid "Location"
+msgstr "Ubicación"
+
+#. module: pixkah_protossmetales
+#: model:ir.model.fields,field_description:pixkah_protossmetales.field_pixkah_protossmetales_scale_max_weight
+msgid "Maximum weight"
+msgstr "Peso máximo"
+
+#. module: pixkah_protossmetales
+#: model:ir.model.fields,field_description:pixkah_protossmetales.field_pixkah_protossmetales_scale_name
+msgid "Name"
+msgstr "Nombre"
+
+#. module: pixkah_protossmetales
+#: model:ir.model.fields,field_description:pixkah_protossmetales.field_pixkah_protossmetales_scale_ticket_net_weight
+msgid "Net Weight"
+msgstr "Peso neto"
+
+#. module: pixkah_protossmetales
+#: selection:pixkah_protossmetales.scale_ticket,protoss_status:0
+msgid "New"
+msgstr "Nuevo"
+
+#. module: pixkah_protossmetales
+#: model:ir.ui.menu,name:pixkah_protossmetales.menu_operations
+msgid "Operations"
+msgstr "Operaciones"
+
+#. module: pixkah_protossmetales
+#: model:ir.ui.menu,name:pixkah_protossmetales.menu_root
+msgid "Protoss Metales"
+msgstr "Protoss Metales"
+
+#. module: pixkah_protossmetales
+#: model:ir.model.fields,field_description:pixkah_protossmetales.field_pixkah_protossmetales_scale_ticket_scale_id
+#: model:ir.ui.view,arch_db:pixkah_protossmetales.view_scale_form
+msgid "Scale"
+msgstr "Báscula"
+
+#. module: pixkah_protossmetales
+#: model:ir.model.fields,field_description:pixkah_protossmetales.field_stock_move_scale_ticket
+#: model:ir.ui.view,arch_db:pixkah_protossmetales.scale_ticket_form_view
+#: model:ir.ui.view,arch_db:pixkah_protossmetales.view_move_picking_form
+msgid "Scale Ticket"
+msgstr "Ticket de Báscula"
+
+#. module: pixkah_protossmetales
+#: model:ir.actions.act_window,name:pixkah_protossmetales.action_scale_ticket_list
+#: model:ir.ui.menu,name:pixkah_protossmetales.menu_scale_tickets_list
+#: model:ir.ui.view,arch_db:pixkah_protossmetales.scale_ticket_tree_view
+msgid "Scale Tickets"
+msgstr "Tickets de Báscula"
+
+#. module: pixkah_protossmetales
+#: model:ir.ui.view,arch_db:pixkah_protossmetales.view_scale_form
+msgid "Scale's Name"
+msgstr "Nombre de la báscula"
+
+#. module: pixkah_protossmetales
+#: model:ir.ui.view,arch_db:pixkah_protossmetales.view_scale_form
+msgid "Scale's short name"
+msgstr "Nombre corto de la báscula"
+
+#. module: pixkah_protossmetales
+#: model:ir.actions.act_window,name:pixkah_protossmetales.action_scale_list
+#: model:ir.ui.menu,name:pixkah_protossmetales.menu_scales_list
+msgid "Scales"
+msgstr "Básculas"
+
+#. module: pixkah_protossmetales
+#: model:ir.model.fields,field_description:pixkah_protossmetales.field_pixkah_protossmetales_scale_serie
+msgid "Serie"
+msgstr "No. de Serie"
+
+#. module: pixkah_protossmetales
+#: model:ir.model.fields,field_description:pixkah_protossmetales.field_pixkah_protossmetales_scale_short_name
+msgid "Short name"
+msgstr "Nombre corto"
+
+#. module: pixkah_protossmetales
+#: model:ir.model.fields,field_description:pixkah_protossmetales.field_pixkah_protossmetales_scale_ticket_protoss_status
+msgid "Status"
+msgstr "Estado"
+
+#. module: pixkah_protossmetales
+#: model:ir.model,name:pixkah_protossmetales.model_stock_move
+#: model:ir.model.fields,field_description:pixkah_protossmetales.field_pixkah_protossmetales_scale_ticket_stock_move
+msgid "Stock Move"
+msgstr "Movimiento de inventario"
+
+#. module: pixkah_protossmetales
+#: model:ir.model.fields,field_description:pixkah_protossmetales.field_pixkah_protossmetales_scale_ticket_name
+msgid "Ticket"
+msgstr "Ticket"
+
+#. module: pixkah_protossmetales
+#: model:ir.model.fields,field_description:pixkah_protossmetales.field_pixkah_protossmetales_scale_ticket_trailer_id
+msgid "Trailer"
+msgstr "Trailer"
+
+#. module: pixkah_protossmetales
+#: model:ir.model,name:pixkah_protossmetales.model_stock_picking
+msgid "Transfer"
+msgstr "Transferir"
+
+#. module: pixkah_protossmetales
+#: model:ir.model.fields,field_description:pixkah_protossmetales.field_pixkah_protossmetales_scale_ticket_vehicle_id
+msgid "Vehicle"
+msgstr "Vehículo"
+
+#. module: pixkah_protossmetales
+#: model:ir.model.fields,field_description:pixkah_protossmetales.field_pixkah_protossmetales_scale_ticket_first_weight
+#: model:ir.model.fields,field_description:pixkah_protossmetales.field_pixkah_protossmetales_scale_ticket_second_weight
+msgid "Weight (kg)"
+msgstr "Peso (kg)"
+
+#. module: pixkah_protossmetales
+#: model:ir.model,name:pixkah_protossmetales.model_pixkah_protossmetales_scale
+msgid "pixkah_protossmetales.scale"
+msgstr "pixkah_protossmetales.scale"
+
+#. module: pixkah_protossmetales
+#: model:ir.model,name:pixkah_protossmetales.model_pixkah_protossmetales_scale_ticket
+msgid "pixkah_protossmetales.scale_ticket"
+msgstr "pixkah_protossmetales.scale_ticket"

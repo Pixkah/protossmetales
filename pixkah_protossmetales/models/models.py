@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from odoo import models, fields, api
+from odoo import models, fields, api, _
 
 # class pixkah_protossmetales(models.Model):
 #     _name = 'pixkah_protossmetales.pixkah_protossmetales'
