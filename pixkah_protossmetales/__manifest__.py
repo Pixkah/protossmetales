@@ -19,17 +19,18 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base',
-                'purchase',
-                'sale_management',
-                'stock',
-                'fleet',
-                'hr',
-                'account_accountant',
-                'account_invoicing',
-                'l10n_mx',
-                'l10n_mx_edi',
-                'l10n_mx_reports',
+    'depends': [
+        'base',
+        'purchase',
+      #   'sale_management',
+        'stock',
+        'fleet',
+        'hr',
+        'account_accountant',
+        'account_invoicing',
+        'l10n_mx',
+      #   'l10n_mx_edi',
+      #   'l10n_mx_reports',
     ],
 
     # always loaded
