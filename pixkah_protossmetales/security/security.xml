@@ -1,0 +1,7 @@
+<odoo>
+
+        <record id="pixkah_protossmetales_group_manager" model="res.groups">
+            <field name="name">Protoss Metales / Managers</field>
+        </record>
+
+</odoo>

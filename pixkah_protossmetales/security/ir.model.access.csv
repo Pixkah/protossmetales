@@ -1,2 +1,3 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_pixkah_protossmetales_pixkah_protossmetales,pixkah_protossmetales.pixkah_protossmetales,model_pixkah_protossmetales_pixkah_protossmetales,,1,0,0,0
+access_pixkah_protossmetales_scale_user,pixkah_protossmetales.scale user,model_pixkah_protossmetales_scale,,1,1,1,1
+access_pixkah_protossmetales_scale_ticket_user,pixkah_protossmetales.scale_ticket user,model_pixkah_protossmetales_scale_ticket,,1,1,1,1

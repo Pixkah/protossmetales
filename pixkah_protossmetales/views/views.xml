@@ -52,6 +52,56 @@
         </field>
     </record>
 
+    <!-- Scale ticket tree view -->
+    <record model="ir.ui.view" id="scale_ticket_tree_view">
+        <field name="name">scale_ticket_tree_view</field>
+        <field name="model">pixkah_protossmetales.scale_ticket</field>
+        <field name="arch" type="xml">
+            <tree string="Scale Tickets">
+                <field name="name"/>
+                <field name="stock_move"/>
+                <field name="move_status"/>
+                <field name="invoice_line"/>
+                <field name="invoice_status"/>
+                <field name="net_weight"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="scale_ticket_form_view">
+      <field name="name">scale_ticket_form_view</field>
+      <field name="model">pixkah_protossmetales.scale_ticket</field>
+      <field name="arch" type="xml">
+        <form string="Scale Ticket">
+          <sheet>
+            <group>
+              <group>
+                <field name="name"/>
+                <field name="scale_id"/>
+                <field name="folio"/>
+                <field name="stock_move"/>
+                <field name="move_status"/>
+                <field name="invoice_line"/>
+                <field name="invoice_status"/>
+                <field name="driver_id"/>
+                <field name="vehicle_id"/>
+                <field name="trailer_id"/>
+                <field name="first_date"/>
+                <field name="first_weight"/>
+                <field name="second_date"/>
+                <field name="second_weight"/>
+                <field name="net_weight"/>
+              </group>
+            </group>
+          </sheet>
+          <div class="oe_chatter">
+              <field name="message_follower_ids" widget="mail_followers"/>
+              <field name="activity_ids" widget="mail_activity"/>
+              <field name="message_ids" widget="mail_thread"/>
+          </div>
+        </form>
+      </field>
+    </record>
 
     <!-- Scale form view -->
     <record model="ir.ui.view" id="pixkah_protossmetales.view_scale_form">
@@ -95,26 +145,49 @@
         </field>
     </record>
 
-    <!-- Adding ticket to stock move -->
-    <record model="ir.ui.view" id="view_stock_move_scale_ticket_tree">
-        <field name="name">pixkah_protossmetales.sotck_scale_ticket_tree</field>
+    <!-- Adding ticket to stock move picking -->
+    <record model="ir.ui.view" id="view_picking_form">
+        <field name="name">stock.picking.form</field>
         <field name="model">stock.picking</field>
         <field name="inherit_id" ref="stock.view_picking_form"/>
         <field name="arch" type="xml">
-          <notebook position="inside">
-            <page string="Scale Tickets">
-              <field name="scale_tickets"/>
-            </page>
-          </notebook>
-          <field name="origin" position="after">
-              <field name="scale_ticket_id"/>
-              <field name="driver_id"/>
-          </field>
+            <xpath expr="//field[@name='move_lines']/tree/field[@name='quantity_done']" position="before">
+                <field name="scale_ticket" domain="[('move_status', 'in', ('new', 'draft'))]"/>
+            </xpath>
+        </field>
+    </record>
+    
+    <!-- Adding ticket to stock move picking -->
+    <record model="ir.ui.view" id="view_move_picking_form">
+        <field name="name">stock.move.form</field>
+        <field name="model">stock.move</field>
+        <field name="inherit_id" ref="stock.view_move_picking_form"/>
+        <field name="arch" type="xml">
+            <group position="inside">
+                <group string="Scale Ticket">
+                    <field name="scale_ticket"/>
+                </group>
+            </group>
+        </field>
+    </record>
+
+    <!-- Adding ticket to supplier invoice -->
+    <record id="invoice_supplier_form" model="ir.ui.view">
+        <field name="name">account.invoice.supplier.form</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account.invoice_supplier_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='quantity']" position="before">
+                <field name="scale_ticket" domain="[('invoice_status', 'in', ('new', 'draft'))]"/>
+                <field name="merma_porcentaje"/>
+                <field name="merma_kg"/>
+            </xpath>
         </field>
     </record>
 
     <!-- Top menu item -->
-    <menuitem name="Protoss Metales" id="pixkah_protossmetales.menu_root"/>
+    <menuitem name="Protoss Metales" id="pixkah_protossmetales.menu_root"
+        web_icon="pixkah_protossmetales,static/description/icon.png"/>
 
     <!-- menu Operations -->
     <menuitem name="Operations" id="pixkah_protossmetales.menu_operations" parent="pixkah_protossmetales.menu_root"/>
