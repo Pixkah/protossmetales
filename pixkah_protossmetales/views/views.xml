@@ -60,8 +60,10 @@
             <tree string="Scale Tickets">
                 <field name="name"/>
                 <field name="stock_move"/>
+                <field name="move_status"/>
+                <field name="invoice_line"/>
+                <field name="invoice_status"/>
                 <field name="net_weight"/>
-                <field name="protoss_status"/>
             </tree>
         </field>
     </record>
@@ -78,7 +80,9 @@
                 <field name="scale_id"/>
                 <field name="folio"/>
                 <field name="stock_move"/>
-                <field name="protoss_status"/>
+                <field name="move_status"/>
+                <field name="invoice_line"/>
+                <field name="invoice_status"/>
                 <field name="driver_id"/>
                 <field name="vehicle_id"/>
                 <field name="trailer_id"/>
@@ -148,11 +152,11 @@
         <field name="inherit_id" ref="stock.view_picking_form"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='move_lines']/tree/field[@name='quantity_done']" position="before">
-                <field name="scale_ticket" domain="[('protoss_status', 'in', ('new', 'draft'))]"/>
+                <field name="scale_ticket" domain="[('move_status', 'in', ('new', 'draft'))]"/>
             </xpath>
         </field>
     </record>
-
+    
     <!-- Adding ticket to stock move picking -->
     <record model="ir.ui.view" id="view_move_picking_form">
         <field name="name">stock.move.form</field>
@@ -167,6 +171,19 @@
         </field>
     </record>
 
+    <!-- Adding ticket to supplier invoice -->
+    <record id="invoice_supplier_form" model="ir.ui.view">
+        <field name="name">account.invoice.supplier.form</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account.invoice_supplier_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='quantity']" position="before">
+                <field name="scale_ticket" domain="[('invoice_status', 'in', ('new', 'draft'))]"/>
+                <field name="merma_porcentaje"/>
+                <field name="merma_kg"/>
+            </xpath>
+        </field>
+    </record>
 
     <!-- Top menu item -->
     <menuitem name="Protoss Metales" id="pixkah_protossmetales.menu_root"

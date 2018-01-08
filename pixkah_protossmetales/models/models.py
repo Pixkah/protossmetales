@@ -39,15 +39,33 @@ class ScaleTicket(models.Model):
     scale_id = fields.Many2one('pixkah_protossmetales.scale', string="Scale")
     folio = fields.Char(string="Folio", required=True, index=True)
 
+    # Inventory
     stock_move = fields.Many2one('stock.move', string="Stock Move")
-
-    protoss_status = fields.Selection([
+    
+    # Ticket status regarding stock movements
+    move_status = fields.Selection([
         ('new', 'New'),
         ('draft', 'Draft'),
-        ('assigned', 'Assigned')
+        ('assigned', 'Assigned'),
+        ('audited', 'Audited'),
       ],
       string="Status",
-      copy=False, index=True, readonly=True,
+      copy=False, index=True,
+      default="new")
+
+    # Invoicing
+    invoice_line = fields.Many2one('account.invoice.line', string="Invoice Line")
+
+    # Ticket status regarding invoicing
+    invoice_status = fields.Selection([
+        ('new', 'New'),
+        ('draft', 'Draft'),
+        ('assigned', 'Assigned'),
+        ('paid', 'Paid'),
+        ('audited', 'Audited'),
+      ],
+      string="Status",
+      copy=False, index=True,
       default="new")
 
     driver_id = fields.Many2one('hr.employee', string="Driver")    
@@ -72,11 +90,19 @@ class ScaleTicket(models.Model):
 
 
 # Inventory
+
+class StockMove(models.Model):
+    _inherit = "stock.move"
+
+    scale_ticket = fields.Many2one('pixkah_protossmetales.scale_ticket',
+      string="Scale Ticket"
+    )
+
 class Picking(models.Model):
     _inherit = "stock.picking"
 
     @api.onchange('move_lines')
-    def _autocompute_done(self):
+    def _autocompute_done_quantity_from_ticket(self):
       for record in self:
         for move in record.move_lines:
           if move.scale_ticket:
@@ -85,11 +111,11 @@ class Picking(models.Model):
               update
                 pixkah_protossmetales_scale_ticket
               set
-                protoss_status='draft',
+                move_status='draft',
                 stock_move=%s
               where
                 id=%s
-            """, (move.id, move.scale_ticket.id))
+            """, [move.id, move.scale_ticket.id])
 
     @api.multi
     def button_validate(self):
@@ -104,20 +130,63 @@ class Picking(models.Model):
               update
                 pixkah_protossmetales_scale_ticket
               set
-                protoss_status='assigned',
+                move_status='assigned',
                 stock_move=%s
               where
                 id=%s
-            """, (move.id, move.scale_ticket.id))
+            """, [move.id, move.scale_ticket.id])
       return res
 
-class StockMove(models.Model):
-    _inherit = "stock.move"
 
-    scale_ticket = fields.Many2one('pixkah_protossmetales.scale_ticket',
-      string="Scale Ticket"
-    )
+# Invoicing
+
+class AccountInvoiceLine(models.Model):
+  _inherit = "account.invoice.line"
+
+  scale_ticket = fields.Many2one('pixkah_protossmetales.scale_ticket',
+    string="Scale Ticket"
+  )
+
+  merma_porcentaje = fields.Float(string="Merma %")
+  merma_kg = fields.Float(string="Merma (kg)")
 
 
+class AccountInvoice(models.Model):
+    _inherit = "account.invoice"
 
+    @api.onchange('invoice_line_ids')
+    def _compute_line_quantity_from_ticket(self):
+      for record in self:
+        for line in record.invoice_line_ids:
+          if line.scale_ticket:
+            quantity = line.scale_ticket.net_weight
+            quantity = quantity - quantity*(line.merma_porcentaje/100)
+            quantity = quantity - line.merma_kg
+            line.quantity = quantity
+            self._cr.execute("""
+                update
+                  pixkah_protossmetales_scale_ticket
+                set
+                  invoice_status='draft'
+                where
+                  id=%s
+              """, [line.scale_ticket.id])
 
+    @api.multi
+    def invoice_validate(self):
+      res = super(AccountInvoice, self).invoice_validate()
+
+      # Update ticket status
+      for line in self.invoice_line_ids:
+        if line.scale_ticket:
+          line.quantity = line.scale_ticket.net_weight
+          self._cr.execute("""
+            update
+              pixkah_protossmetales_scale_ticket
+            set
+              invoice_status='assigned',
+              invoice_line=%s
+            where
+              id=%s
+          """, [line.id, line.scale_ticket.id])
+      return res
