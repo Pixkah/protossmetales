@@ -119,8 +119,6 @@ class Picking(models.Model):
 
     @api.multi
     def button_validate(self):
-      res = super(Picking, self).button_validate()
-
       # Update ticket status
       for record in self:
         for move in record.move_lines:
@@ -135,6 +133,9 @@ class Picking(models.Model):
               where
                 id=%s
             """, [move.id, move.scale_ticket.id])
+
+      res = super(Picking, self).button_validate()
+
       return res
 
 
